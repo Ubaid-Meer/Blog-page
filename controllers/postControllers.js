@@ -5,7 +5,7 @@ const Post=require('../models/Post')
 exports.getallPosts=async(req,res)=>{
     try{
         const posts=await Post.find().sort({createdAt:-1}) 
-        res.render('home',{posts} )
+        res.render('home',{posts, messages: req.flash() } )
     } catch (error) {
         console.error(error)
         res.redirect('/')
@@ -15,7 +15,7 @@ exports.getallPosts=async(req,res)=>{
 // show form to create new post
 
 exports.getCreatePost=async(req,res)=>{
-    res.render('create',{message})
+    res.render('create',{ messages: req.flash() })
 }
 
 exports.createPost=async(req,res)=>{
@@ -40,7 +40,7 @@ exports.createPost=async(req,res)=>{
 exports.getSinglePost=async(req,res)=>{
     try {
         const post=await Post.findById(req.params.id);
-        res.render('post',{post})
+        res.render('post',{pos, messages: req.flash() })
         
     } catch(error){
                 console.error(error)
@@ -52,7 +52,7 @@ exports.getSinglePost=async(req,res)=>{
 exports.getEditPost=async(req,res)=>{
     try {
         const post= await Post.findById(req.params.id);
-        res.render('edit',{post})
+        res.render('edit',{post, message:req.flash() })
     } catch (error) {
                 console.error(error)
         res.redirect('/')

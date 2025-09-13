@@ -11,5 +11,21 @@
     <p>Here we are Providing  the information about latest technology 
         tool and Languages
     </p>
+    <% if (message.success) { %>
+     <p style="color:green"><%= message.success %></p>
+    <% } %>
+    <% if (message.error) { %>
+     <p style="color:red"><%= message.error %></p>
+    <% } %>
+
+    <a href="/posts/create">Create New Post</a>
+
+    <ul>
+        <% posts.forEach(post => { %>
+         <li>
+            <a href="/posts/<%=post.id %><%= post.title %>">by<%= post.author %></a>
+         </li>
+        <% }) %>
+    </ul>
 </body>
 </html>
