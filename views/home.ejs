@@ -1,31 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
+  <meta charset="UTF-8">
+  <title>Blog Home</title>
 </head>
 <body>
-    <%- include('./layouts') %>
-    <h2>Welcome to Coding Blog Website</h2>
-    <p>Here we are Providing  the information about latest technology 
-        tool and Languages
-    </p>
-    <% if (message.success) { %>
-     <p style="color:green"><%= message.success %></p>
-    <% } %>
-    <% if (message.error) { %>
-     <p style="color:red"><%= message.error %></p>
-    <% } %>
+    <%- include("partials/header", { title: "Home", session: session, messages: messages }) %>
+  <h1>Welcome to Blog App</h1>
+  <% if (messages.error) { %>
+    <p style="color:red;"><%= messages.error %></p>
+  <% } %>
+  <% if (messages.success) { %>
+    <p style="color:green;"><%= messages.success %></p>
+  <% } %>
 
-    <a href="/posts/create">Create New Post</a>
-
-    <ul>
-        <% posts.forEach(post => { %>
-         <li>
-            <a href="/posts/<%=post.id %><%= post.title %>">by<%= post.author %></a>
-         </li>
-        <% }) %>
-    </ul>
+  <h2>All Posts</h2>
+  <ul>
+    <% posts.forEach(post => { %>
+      <li>
+        <a href="/posts/<%= post._id %>"><%= post.title %></a>
+        <small> by <%= post.author %></small>
+      </li>
+    <% }) %>
+  </ul>
 </body>
 </html>
